@@ -4,7 +4,7 @@ import random
 from credentials import consumer_key, consumer_secret, access_token, access_token_secret
 
 # Generate a silly name.
-word_url = "http://svnweb.freebsd.org/csrg/share/dict/words?view=co&content-type=text/plain"
+word_url = "https://pastebin.com/raw/XkqgGbyg"
 response = urllib.request.urlopen(word_url)
 long_txt = response.read().decode()
 words = long_txt.splitlines()
@@ -30,7 +30,7 @@ items = ", & ".join([", ".join(subset_items[:-1]), subset_items[-1]])
 # items = "\n- ".join(["\n- ".join(subset_items[:-1]), subset_items[-1]])
 
 # Array of Portraits
-goon_portraits = ["images/goon_a.png", "images/goon_b.png", "images/goon_c.png", "images/goon_d.png"]
+goon_portraits = ["/home/atunnelgoon/images/goon_a.png", "/home/atunnelgoon/images/goon_b.png", "/home/atunnelgoon/images/goon_c.png", "/home/atunnelgoon/images/goon_d.png", "/home/atunnelgoon/images/goon_e.png", "/home/atunnelgoon/images/goon_f.png", "/home/atunnelgoon/images/goon_g.png", "/home/atunnelgoon/images/goon_h.png", "/home/atunnelgoon/images/goon_i.png", "/home/atunnelgoon/images/goon_j.png", "/home/atunnelgoon/images/goon_k.png", "/home/atunnelgoon/images/goon_l.png", "/home/atunnelgoon/images/goon_m.png", "/home/atunnelgoon/images/goon_n.png", "/home/atunnelgoon/images/goon_o.png", "/home/atunnelgoon/images/goon_p.png"]
 
 class ATunnelGoonBot:
   def __init__(self, names):
@@ -47,12 +47,12 @@ class ATunnelGoonBot:
   def tweet(self):
     name = self.model
     portrait_list_item = random.sample(goon_portraits, 1)
-    portrait = str(portrait_list_item)
+    portrait = ''.join(portrait_list_item)
     message = "Greetings " + name + ",\n\nYou have 10HP, & your Inventory Score is 8.\nYour stats are: " + str(brute) + " Brute, " + str(skulker) + " Skulker, & " + str(erudite) + " Erudite.\nYour possesions include " + items + ".\n\nGodspeed."
     # message = name + "\n\n10 Health Points\n8 Inventory Score\n\nStats:\n" + str(brute) + " Brute\n" + str(skulker) + " Skulker\n" + str(erudite) + " Erudite\n\nPossesions:\n- " + items
     try:
       self.api.update_with_media(portrait, message)
-      print(message)
+      # print(message)
     except tweepy.TweepError as error:
       print(message)
       print(error.reason)
